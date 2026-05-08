@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Navbar } from './components/Navbar';
 import { KanbanBoard } from './components/KanbanBoard';
@@ -29,6 +29,12 @@ export default function App() {
     deleteTask(id);
     toast.success('Task deleted successfully');
   };
+
+  const { loadTasks } = useKanbanStore();
+
+  useEffect(() => {
+    loadTasks();
+  }, [loadTasks]);
 
   const handleAddTask = () => {
     setEditingTask(undefined);
